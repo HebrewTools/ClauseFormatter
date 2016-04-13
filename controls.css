@@ -1,0 +1,8 @@
+#controls label {
+  margin-right: 1em;
+}
+
+.input-chapter, .input-verse {
+  width: 6em !important;
+}
+

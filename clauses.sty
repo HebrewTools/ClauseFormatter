@@ -1,0 +1,78 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{clauses}
+  [2016/04/08 v0.1 Typesetting sentences in clauses]
+
+\RequirePackage{fancybox}
+\RequirePackage{pdftexcmds}
+\RequirePackage{alphalph}
+
+\newcounter{clausenrtemp}
+\def\clausenr#1#2{%
+  \setcounter{clausenrtemp}{#2}%
+  \ifnum\pdf@strcmp{#1}{0}=\z@ %
+    \arabic{clausenrtemp}%
+  \else\ifnum\pdf@strcmp{#1}{1}=\z@ %
+    \alphalph{\value{clausenrtemp}}%
+  \else\ifnum\pdf@strcmp{#1}{2}=\z@ %
+    \roman{clausenrtemp}%
+  \fi\fi\fi%
+}
+
+\newdimen\clauseskip
+\clauseskip=3pt
+
+\def\clause@itab#1{\hspace{0em}\rlap{#1}}
+\def\clause@tab#1{\hspace{.06\textwidth}\rlap{#1}}
+
+\newcount\clauselevel\clauselevel=0
+\newcount\clausenra\clausenra=0
+\newcount\clausenrb\clausenrb=0
+\newcount\clausenrc\clausenrc=0
+\long\def\clause#1{%
+  \advance\clauselevel by 1
+  \ifnum\clauselevel=1 %
+    \advance\clausenra by 1%
+    \clause@itab{\LR{\clausenr0{\the\clausenra}}} \clause@tab{#1}
+    \clausenrb=0
+  \else\ifnum\clauselevel=2
+    \advance\clausenrb by 1%
+    \clause@itab{\LR{\clausenr0{\the\clausenra}\clausenr1{\the\clausenrb}}} \clause@tab{#1}
+    \clausenrc=0
+  \else\ifnum\clauselevel=3
+    \advance\clausenrc by 1%
+    \clause@itab{\LR{\clausenr0{\the\clausenra}\clausenr1{\the\clausenrb}\clausenr2{\the\clausenrc}}} \clause@tab{#1}
+  \fi\fi\fi
+  \advance\clauselevel by -1
+  \vskip\clauseskip
+}
+\long\def\clauses#1{%
+  \advance\clauselevel by 1
+  \ifnum\clauselevel=1 %
+    \advance\clausenra by 1%
+    #1
+    \clausenrb=0
+  \else\ifnum\clauselevel=2 %
+    \advance\clausenrb by 1%
+    #1
+    \clausenrc=0
+  \else\ifnum\clauselevel=3 %
+    \advance\clausenrc by 1%
+    #1
+  \fi\fi\fi
+  \advance\clauselevel by -1
+  \par
+}
+
+\def\clausei#1#2{\clause{\clause@indent#1 #2}} % Indented clause
+
+\newcount\clause@indent@count
+\def\clause@indent#1{%
+  \begingroup
+  \clause@indent@count=\z@
+  \@whilenum\clause@indent@count<#1\do{\quad\advance\clause@indent@count\@ne}%
+  \endgroup
+}
+
+\def\subj#1{\ovalbox{#1}}
+\def\pred#1{\fbox{#1}}
+

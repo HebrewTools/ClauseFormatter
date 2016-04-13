@@ -1,0 +1,38 @@
+div#text {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+  div.verse {
+    position: relative;
+  }
+
+  span.ref {
+    font-family: serif;
+    position: absolute;
+    right: -20px;
+  }
+
+  div.clause {
+    font-family: 'Ezra SIL', 'David';
+  }
+
+    span.word {
+      border-radius: 3px;
+      cursor: pointer;
+      margin-left: 0.5em;
+      padding: 2px;
+    }
+
+      span.word:hover {
+        background-color: #ccc;
+      }
+
+      span.word.deleted {
+        color: #aaa;
+      }
+
+      span.word.selected {
+        background-color: #33c2f2;
+      }
+
