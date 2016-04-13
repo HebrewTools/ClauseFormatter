@@ -1,8 +1,30 @@
-#controls label {
-  margin-right: 1em;
+#help {
+  display: none;
 }
 
-.input-chapter, .input-verse {
+#show_help {
+  margin-top: -30px;
+}
+
+#controls label {
+  margin-right: 0.5em;
+}
+
+.input-book, .input-chapter, .input-verse {
+  font-size: 85%;
+}
+
+.input-book {
+  width: 9em !important;
+}
+
+.input-chapter {
+  border-left: none;
   width: 6em !important;
+}
+
+.input-verse {
+  border-left: none;
+  width: 5em !important;
 }
 

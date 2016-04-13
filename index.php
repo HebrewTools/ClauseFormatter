@@ -27,12 +27,34 @@
 
       <div class="page-header">
         <h1>Hebrew Clause Formatter</h1>
+        <button type="button" class="btn btn-sm pull-right" id="show_help">help</button>
+      </div>
+
+      <div id="help">
+        <div class="row">
+          <div class="col-md-12">
+            <p>
+              Enter the start and end Bible references and hit <code>Get text</code> to load the Hebrew text (Leningrad codex). Then start editing. Click on a word to select it. Then use any of the following keys:
+            </p>
+            <ul>
+              <li><code>Return</code> (Enter), to insert a clause break.</li>
+              <li><code>Tab</code>, to indent the selected clause.</li>
+              <li><code>Backspace</code>, to unindent the selected clause. When the clause is not indented at all, the clause break is removed (the clause is appended to the previous clause).</li>
+              <li><code>Delete</code>, to delete a word. It will still be visible, so you can undelete it (with <code>Delete</code> as well), but won't appear in the PDF output.</li>
+              <li>Arrow keys to move around.</li>
+            </ul>
+            <p>When you're done, use <code>PDF</code> to create a PDF document.</p>
+            <p>You can save your work using <code>Save / Restore</code>. Copy the text in the field to somewhere secure. When you want to continue your work, use the same button, input the saved text and hit <code>Restore</code>.</p>
+            <p>During editing, only verse numbers (1, 2, 3, ...) are shown. The PDF will have subnumbering (1a, 1b, ...).</p>
+          </div>
+        </div>
+        <hr/>
       </div>
 
       <div id="controls">
         <div class="row">
           <form class="form-inline" action="#" id="get_text_form">
-            <div class="col-md-5">
+            <div class="col-md-4">
               <label>From:</label>
               <div class="form-group">
                 <div class="input-group">
@@ -51,7 +73,7 @@
               </div>
             </div>
 
-            <div class="col-md-5">
+            <div class="col-md-4">
               <label>To:</label>
               <div class="form-group">
                 <div class="input-group">
@@ -76,11 +98,14 @@
               </div>
             </div>
           </form>
-          <form action="makePdf.php" name="make_pdf" method="post" target="_blank" id="make_pdf">
+          <form action="makePdf.php" name="make_pdf" method="post" target="_blank" id="make_pdf" class="form-inline">
             <input type="hidden" name="verses"/>
-            <div class="col-md-1">
+            <div class="col-md-3">
               <div class="form-group">
-                <button class="btn btn-sm btn-success">Make PDF</button>
+                <button class="btn btn-sm btn-success">PDF</button>
+              </div>
+              <div class="form-group">
+                <a class="btn btn-sm btn-info" data-toggle="modal" href="#saveModal">Save / Restore</a>
               </div>
             </div>
           </form>
@@ -88,6 +113,25 @@
       </div>
   
       <div id="text" dir="rtl"></div>
+
+      <div class="modal fade" id="saveModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">×</button>
+              <h3>Save and restore</h3>
+            </div>
+            <div class="modal-body">
+              <p>Save this text somewhere, or input an old text to restore:</p>
+              <textarea id="saveTextarea" class="form-control" rows="6"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="restore">Restore</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div>
   </body>

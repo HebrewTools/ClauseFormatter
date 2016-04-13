@@ -10,7 +10,7 @@ div#text {
   span.ref {
     font-family: serif;
     position: absolute;
-    right: -20px;
+    right: -1.5em;
   }
 
   div.clause {

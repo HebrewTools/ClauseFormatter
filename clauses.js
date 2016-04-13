@@ -164,6 +164,7 @@ function select_word(elem) {
     'word': word,
     'wordcount': get_word_count(verse, clause, word)
   };
+
   update_document();
 }
 
@@ -192,7 +193,7 @@ $('#make_pdf').submit(function(){
 $('body').keypress(function(event){
   console.log(event);
 
-  if (event.target.form) {
+  if (typeof event.target.form != 'undefined') {
     return true;
   }
 
@@ -260,5 +261,20 @@ $('body').keypress(function(event){
   update_document();
   
   return false;
+});
+
+$('#saveModal').on('shown.bs.modal', function(){
+  $('#saveTextarea').val(JSON.stringify(state.verses));
+});
+
+$('#restore').click(function(){
+  state.verses = JSON.parse($('#saveTextarea').val());
+  state.selected = null;
+  update_document();
+  $('#saveModal').modal('hide');
+});
+
+$('#show_help').click(function(){
+  $('#help').slideToggle();
 });
 

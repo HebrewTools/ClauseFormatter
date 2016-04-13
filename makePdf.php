@@ -40,6 +40,7 @@ copy('clauses.sty', $dir . '/clauses.sty');
 
 $format = file_get_contents('format.tex');
 $result = str_replace('%%%CLAUSES%%%', $tex, $format);
+$result = str_replace('%%%FIRSTVERSE%%%', $verses[0]['ref'] - 1, $result);
 file_put_contents($dir . '/result.tex', $result);
 
 exec("cd $dir && PATH=/usr/bin:\$PATH TEXMFHOME=/home/camil/texmf xelatex result.tex",
