@@ -17,7 +17,8 @@ function get_all_books() {
   $books = [];
   while (!feof($fh)) {
     $line = explode("\t", trim(fgets($fh)));
-    $books[$line[0]] = $line[1];
+    if (count($line) > 1)
+      $books[$line[0]] = $line[1];
   }
   fclose($fh);
   return $books;
