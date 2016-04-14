@@ -6,14 +6,15 @@ var state = {
 // Insert a clause break on the specified location. loc should have the keys
 // verse, clause and word.
 function insert_clause_break(loc) {
-  console.log(loc);
-  var org_clause = state.verses[loc.verse].clauses[loc.clause];
-  state.verses[loc.verse].clauses.splice(loc.clause + 1, 0, {
-      'indent': org_clause.indent,
-      'words': org_clause.words.slice(loc.word)
-  });
-  state.verses[loc.verse].clauses[loc.clause].words
-    = org_clause.words.slice(0, loc.word);
+  if (loc.word != 0) {
+    var org_clause = state.verses[loc.verse].clauses[loc.clause];
+    state.verses[loc.verse].clauses.splice(loc.clause + 1, 0, {
+        'indent': org_clause.indent,
+        'words': org_clause.words.slice(loc.word)
+    });
+    state.verses[loc.verse].clauses[loc.clause].words
+      = org_clause.words.slice(0, loc.word);
+  }
 }
 
 // Remove a clause break before the specified location (merge the specified
@@ -129,15 +130,15 @@ function find_location(loc) {
     var words = clauses[ci].words;
     for (wi in words) {
       if (wordcount >= loc.wordcount) {
-        loc.clause = ci;
-        loc.word = wi;
+        loc.clause = parseInt(ci);
+        loc.word = parseInt(wi);
         return loc;
       }
       wordcount++;
     }
   }
-  loc.clause = ci;
-  loc.word = wi;
+  loc.clause = parseInt(ci);
+  loc.word = parseInt(wi);
   loc.wordcount = wordcount - 1;
   return loc;
 }
@@ -190,9 +191,7 @@ $('#make_pdf').submit(function(){
   document.forms.make_pdf.elements.verses.value = JSON.stringify(state.verses);
 });
 
-$('body').keypress(function(event){
-  console.log(event);
-
+$('body').keydown(function(event){
   if (typeof event.target.form != 'undefined') {
     return true;
   }
@@ -227,27 +226,42 @@ $('body').keypress(function(event){
       if (state.selected) {
         if (state.selected.wordcount > 0)
           state.selected.wordcount--;
-        state.selected = find_location(state.selected);
       }
       break;
     case 37: // Left
       if (state.selected) {
         state.selected.wordcount++;
-        state.selected = find_location(state.selected);
       }
       break;
     case 38: // Up
       if (state.selected) {
-        if (state.selected.verse > 0)
+        if (state.selected.clause > 0) {
+          state.selected.wordcount -= Math.max(
+              state.verses[state.selected.verse]
+                .clauses[state.selected.clause - 1].words.length,
+              state.selected.word + 1);
+        } else if (state.selected.verse > 0) {
           state.selected.verse--;
-        state.selected = find_location(state.selected);
+          state.selected.wordcount =
+              state.verses[state.selected.verse].clauses.reduce(
+                      function(a,b){return a+b.words.length;}, 0) -
+              state.verses[state.selected.verse].clauses
+                [state.verses[state.selected.verse].clauses.length - 1]
+                .words.length +
+              state.selected.word;
+        }
       }
       break;
     case 40: // Down
       if (state.selected) {
-        if (state.selected.verse + 1 < state.verses.length)
+        if (state.selected.clause + 1 <
+                state.verses[state.selected.verse].clauses.length) {
+          state.selected.wordcount += state.verses[state.selected.verse]
+              .clauses[state.selected.clause].words.length;
+        } else if (state.selected.verse + 1 < state.verses.length) {
           state.selected.verse++;
-        state.selected = find_location(state.selected);
+          state.selected.wordcount = state.selected.word;
+        }
       }
       break;
     default:
