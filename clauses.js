@@ -3,6 +3,18 @@ var state = {
   'selected': null
 };
 
+// Toggle a special annotation for a word on a location
+function toggle_word_special(loc, special) {
+  var words = state.verses[loc.verse].clauses[loc.clause].words[loc.word].specials;
+  var i = words.indexOf(special);
+
+  if (i == -1) {
+    state.verses[loc.verse].clauses[loc.clause].words[loc.word].specials.push(special);
+  } else {
+    state.verses[loc.verse].clauses[loc.clause].words[loc.word].specials.splice(i, 1);
+  }
+}
+
 // Insert a clause break on the specified location. loc should have the keys
 // verse, clause and word.
 function insert_clause_break(loc) {
@@ -62,7 +74,9 @@ function getText(reference, callback) {
 // Initially this is just one clause
 // A clause has keys indent and words
 function make_verse(verse) {
-  var make_word = function(word) { return {'text': word, 'deleted': false}; }
+  var make_word = function(word) {
+      return {'text': word, 'deleted': false, 'specials': []};
+  }
 
   return {
     'ref': verse.verse,
@@ -83,6 +97,9 @@ function make_editable_clause(clause) {
           .text(clause.words[i].text);
     if (clause.words[i].deleted) {
       word.addClass('deleted');
+    }
+    for (j in clause.words[i].specials) {
+      word.addClass('special-' + clause.words[i].specials[j]);
     }
     div.append(word);
   }
@@ -196,7 +213,12 @@ $('body').keydown(function(event){
     return true;
   }
 
+  console.log(event);
+
   switch (event.keyCode) {
+    case 27: // Escape
+      state.selected = null;
+      break;
     case 13: // Return
       if (state.selected) {
         insert_clause_break(state.selected);
@@ -262,6 +284,16 @@ $('body').keydown(function(event){
           state.selected.verse++;
           state.selected.wordcount = state.selected.word;
         }
+      }
+      break;
+    case 80: // P (predicate)
+      if (state.selected) {
+        toggle_word_special(state.selected, 'predicate');
+      }
+      break;
+    case 83: // S (subject)
+      if (state.selected) {
+        toggle_word_special(state.selected, 'subject');
       }
       break;
     default:

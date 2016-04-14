@@ -5,6 +5,7 @@
 \RequirePackage{fancybox}
 \RequirePackage{pdftexcmds}
 \RequirePackage{alphalph}
+\RequirePackage{xcolor}
 
 \newcounter{clausenrtemp}
 \def\clausenr#1#2{%
@@ -73,6 +74,6 @@
   \endgroup
 }
 
-\def\subj#1{\ovalbox{#1}}
-\def\pred#1{\fbox{#1}}
+\def\subj#1{\textcolor{red}{#1}}
+\def\pred#1{\textcolor{blue}{#1}}
 

@@ -36,3 +36,19 @@ div#text {
         background-color: #33c2f2;
       }
 
+      span.word.special-predicate {
+        color: #00f;
+      }
+
+        span.word.special-predicate.deleted {
+          color: #66f;
+        }
+
+      span.word.special-subject {
+        color: #b00;
+      }
+
+        span.word.special-subject.deleted {
+          color: #f66;
+        }
+

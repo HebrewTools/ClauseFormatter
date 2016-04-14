@@ -2,7 +2,12 @@
 function get_word_text($word) {
   if ($word['deleted'])
     return '';
-  return trim($word['text']);
+  $text = trim($word['text']);
+  if (in_array('subject', $word['specials']))
+    return '\subj{' . $text . '}';
+  if (in_array('predicate', $word['specials']))
+    return '\pred{' . $text . '}';
+  return $text;
 }
 
 function make_tex_clause($clause) {
