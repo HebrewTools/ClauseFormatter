@@ -10,6 +10,10 @@
   margin-right: 0.5em;
 }
 
+form.form-inline {
+  display: inline;
+}
+
 .input-book, .input-chapter, .input-verse {
   font-size: 85%;
 }

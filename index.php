@@ -44,7 +44,7 @@
               <li><code>p</code> and <code>s</code>, to (un)mark words as predicates or subjects, respectively. They will be coloured blue and red, also in the PDF output.</li>
               <li>Arrow keys to move around.</li>
             </ul>
-            <p>When you're done, use <code>PDF</code> to create a PDF document.</p>
+            <p>When you're done, use <code>PDF</code> to create a PDF document. With <code>TeX</code> you can get a ZIP file with generated (XeLa)TeX sources. The archive also includes the compiled PDF.</p>
             <p>You can save your work using <code>Save / Restore</code>. Copy the text in the field to somewhere secure. When you want to continue your work, use the same button, input the saved text and hit <code>Restore</code>.</p>
             <p>During editing, only verse numbers (1, 2, 3, ...) are shown. The PDF will have subnumbering (1a, 1b, ...).</p>
           </div>
@@ -99,17 +99,25 @@
               </div>
             </div>
           </form>
-          <form action="makePdf.php" name="make_pdf" method="post" target="_blank" id="make_pdf" class="form-inline">
-            <input type="hidden" name="verses"/>
-            <div class="col-md-3">
+          <div class="col-md-3">
+            <form action="makePdf.php" name="make_pdf" method="post" target="_blank" id="make_pdf" class="form-inline">
+              <input type="hidden" name="verses"/>
               <div class="form-group">
                 <button class="btn btn-sm btn-success">PDF</button>
               </div>
+            </form>
+            <form action="makeTeX.php" name="make_tex" method="post" target="_blank" id="make_tex" class="form-inline">
+              <input type="hidden" name="verses"/>
+              <div class="form-group">
+                <button class="btn btn-sm btn-warning">TeX</button>
+              </div>
+            </form>
+            <form action="#" class="form-inline">
               <div class="form-group">
                 <a class="btn btn-sm btn-info" data-toggle="modal" href="#saveModal">Save / Restore</a>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
   

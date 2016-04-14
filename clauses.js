@@ -207,6 +207,9 @@ $('#get_text_form').submit(function(){
 $('#make_pdf').submit(function(){
   document.forms.make_pdf.elements.verses.value = JSON.stringify(state.verses);
 });
+$('#make_tex').submit(function(){
+  document.forms.make_tex.elements.verses.value = JSON.stringify(state.verses);
+});
 
 $('body').keydown(function(event){
   if (typeof event.target.form != 'undefined') {
