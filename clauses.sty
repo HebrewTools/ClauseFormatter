@@ -64,7 +64,15 @@
   \par
 }
 
-\def\clausei#1#2{\clause{\clause@indent#1 #2}} % Indented clause
+\def\clausei#1#2{% Indented clause
+	\dimen255=\linewidth %
+	\advance\dimen255 by -#1em %
+	\advance\dimen255 by -3cm %
+	\clause{\clause@indent#1\begin{minipage}{\the\dimen255}%
+		\parindent=-1.5em
+		#2
+	\end{minipage}}%
+}
 
 \newcount\clause@indent@count
 \def\clause@indent#1{%
