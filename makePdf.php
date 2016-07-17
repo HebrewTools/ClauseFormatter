@@ -12,6 +12,7 @@ if ($return_var != 0) {
   print('An unknown error occurred.');
 } else {
   header('Content-type: application/pdf');
+	header('Content-Disposition: attachment; filename="result.pdf"');
   readfile($dir . '/result.pdf');
 }
 

@@ -113,6 +113,12 @@
                 <button class="btn btn-sm btn-warning">TeX</button>
               </div>
             </form>
+            <form action="makeZip.php" name="make_zip" method="post" target="_blank" id="make_zip" class="form-inline">
+              <input type="hidden" name="verses"/>
+              <div class="form-group">
+                <button class="btn btn-sm btn-warning">Zip</button>
+              </div>
+            </form>
             <form action="#" class="form-inline">
               <div class="form-group">
                 <a class="btn btn-sm btn-info" data-toggle="modal" href="#saveModal">Save / Restore</a>
