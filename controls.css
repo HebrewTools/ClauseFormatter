@@ -1,34 +1,33 @@
 #help {
-  display: none;
+	display: none;
 }
 
 #show_help {
-  margin-top: -30px;
+	margin-top: -30px;
 }
 
 #controls label {
-  margin-right: 0.5em;
+	margin-right: 0.5em;
 }
 
 form.form-inline {
-  display: inline;
+	display: inline;
 }
 
 .input-book, .input-chapter, .input-verse {
-  font-size: 85%;
+	font-size: 85%;
 }
 
 .input-book {
-  width: 9em !important;
+	width: 9em !important;
 }
 
 .input-chapter {
-  border-left: none;
-  width: 6em !important;
+	border-left: none;
+	width: 6em !important;
 }
 
 .input-verse {
-  border-left: none;
-  width: 5em !important;
+	border-left: none;
+	width: 5em !important;
 }
-

@@ -1,59 +1,58 @@
 @font-face {
-  font-family: 'Ezra SIL';
-  src: url('EzraSIL.ttf');
+	font-family: 'Ezra SIL';
+	src: url('EzraSIL.ttf');
 }
 
 div#text {
-  font-size: 20px;
-  margin-top: 20px;
+	font-size: 20px;
+	margin-top: 20px;
 }
 
-  div.verse {
-    position: relative;
-  }
+	div.verse {
+		position: relative;
+	}
 
-  span.ref {
-    font-family: serif;
-    position: absolute;
-    right: -1.5em;
-  }
+	span.ref {
+		font-family: serif;
+		position: absolute;
+		right: -1.5em;
+	}
 
-  div.clause {
-    font-family: 'Ezra SIL', 'David';
-  }
+	div.clause {
+		font-family: 'Ezra SIL', 'David';
+	}
 
-    span.word {
-      border-radius: 3px;
-      cursor: pointer;
-      margin-left: 0.5em;
-      padding: 2px;
-    }
+		span.word {
+			border-radius: 3px;
+			cursor: pointer;
+			margin-left: 0.5em;
+			padding: 2px;
+		}
 
-      span.word:hover {
-        background-color: #ccc;
-      }
+			span.word:hover {
+				background-color: #ccc;
+			}
 
-      span.word.deleted {
-        color: #aaa;
-      }
+			span.word.deleted {
+				color: #aaa;
+			}
 
-      span.word.selected {
-        background-color: #33c2f2;
-      }
+			span.word.selected {
+				background-color: #33c2f2;
+			}
 
-      span.word.special-predicate {
-        color: #00f;
-      }
+			span.word.special-predicate {
+				color: #00f;
+			}
 
-        span.word.special-predicate.deleted {
-          color: #66f;
-        }
+				span.word.special-predicate.deleted {
+					color: #66f;
+				}
 
-      span.word.special-subject {
-        color: #b00;
-      }
+			span.word.special-subject {
+				color: #b00;
+			}
 
-        span.word.special-subject.deleted {
-          color: #f66;
-        }
-
+				span.word.special-subject.deleted {
+					color: #f66;
+				}

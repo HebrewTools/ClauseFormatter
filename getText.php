@@ -9,5 +9,4 @@ $end_verse      = $_GET['end_verse'];
 require('clauses.php');
 
 print(json_encode(get_text($start_book, $start_chapter, $start_verse,
-  $end_book, $end_chapter, $end_verse)));
-
+	$end_book, $end_chapter, $end_verse)));

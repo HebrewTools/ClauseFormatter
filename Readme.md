@@ -26,4 +26,3 @@ version of the Westminster Leningrad Codex.
 [demo]: https://demo.camilstaps.nl/HebrewClauses
 [ezrasil]: http://scripts.sil.org/cms/scripts/page.php?item_id=EzraSIL_Home
 [unboundbible]: http://unboundbible.org/
-
