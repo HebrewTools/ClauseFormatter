@@ -15,6 +15,18 @@ function toggle_word_special(loc, special) {
 	}
 }
 
+// Toggle a special annotation for a clause on a location
+function toggle_clause_special(loc, special) {
+	var specials = state.verses[loc.verse].clauses[loc.clause].specials;
+	var i = specials.indexOf(special);
+
+	if (i == -1) {
+		state.verses[loc.verse].clauses[loc.clause].specials.push(special);
+	} else {
+		state.verses[loc.verse].clauses[loc.clause].specials.splice(i, 1);
+	}
+}
+
 // Insert a clause break on the specified location. loc should have the keys
 // verse, clause and word.
 function insert_clause_break(loc) {
@@ -22,7 +34,8 @@ function insert_clause_break(loc) {
 		var org_clause = state.verses[loc.verse].clauses[loc.clause];
 		state.verses[loc.verse].clauses.splice(loc.clause + 1, 0, {
 				'indent': org_clause.indent,
-				'words': org_clause.words.slice(loc.word)
+				'words': org_clause.words.slice(loc.word),
+				'specials': []
 		});
 		state.verses[loc.verse].clauses[loc.clause].words
 			= org_clause.words.slice(0, loc.word);
@@ -80,7 +93,11 @@ function make_verse(verse) {
 
 	return {
 		'ref': verse.verse,
-		'clauses': [{'indent': 0, 'words': verse.text.split(' ').map(make_word)}]
+		'clauses': [{
+			'indent': 0,
+			'words': verse.text.split(' ').map(make_word),
+			'specials': []
+		}]
 	};
 }
 
@@ -88,6 +105,9 @@ function make_verse(verse) {
 function make_editable_clause(clause) {
 	var div = $('<div></div>');
 	div.addClass('clause');
+	for (var i in clause.specials) {
+		div.addClass('special-' + clause.specials[i]);
+	}
 	div.css('margin-right', (clause.indent * 1.5) + 'em');
 	for (var i in clause.words) {
 		var word = $('<span></span>')
@@ -98,7 +118,7 @@ function make_editable_clause(clause) {
 		if (clause.words[i].deleted) {
 			word.addClass('deleted');
 		}
-		for (j in clause.words[i].specials) {
+		for (var j in clause.words[i].specials) {
 			word.addClass('special-' + clause.words[i].specials[j]);
 		}
 		div.append(word);
@@ -287,6 +307,11 @@ $('body').keydown(function(event){
 					state.selected.verse++;
 					state.selected.wordcount = state.selected.word;
 				}
+			}
+			break;
+		case 68: // D (diacritical sign)
+			if (state.selected) {
+				toggle_clause_special(state.selected, 'diacritical');
 			}
 			break;
 		case 80: // P (predicate)

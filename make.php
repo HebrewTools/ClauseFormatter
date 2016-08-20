@@ -10,9 +10,17 @@ function get_word_text($word) {
 	return $text;
 }
 
+$clause_indents = [];
 function make_tex_clause($clause) {
 	$tex	= '';
+	if (in_array('diacritical', $clause['specials'])) {
+		global $clause_indents;
+		$tex .= '\clausenrb=' . $clause_indents[$clause['indent']] . "\n";
+	}
 	$tex .= '\clausei' . $clause['indent'] . '{';
+	if (in_array('diacritical', $clause['specials'])) {
+		$tex .= '\diacritical{}';
+	}
 	$tex .= implode(' ', array_map('get_word_text', $clause['words'])) . '}';
 	return $tex;
 }
@@ -22,9 +30,12 @@ function make_tex_clauses($verse) {
 	if (count($verse['clauses']) == 1) {
 		$tex .= make_tex_clause($verse['clauses'][0]) . "\n";
 	} else {
+		global $clause_indents;
+		$clause_indents = [];
 		$tex .= '\clauses{' . "\n";
-		foreach ($verse['clauses'] as $clause) {
+		foreach ($verse['clauses'] as $i => $clause) {
 			$tex .= make_tex_clause($clause) . "\n";
+			$clause_indents[$clause['indent']] = $i;
 		}
 		$tex .= "}\n";
 	}
