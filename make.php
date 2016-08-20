@@ -15,7 +15,9 @@ function make_tex_clause($clause) {
 	$tex	= '';
 	if (in_array('diacritical', $clause['specials'])) {
 		global $clause_indents;
-		$tex .= '\clausenrb=' . $clause_indents[$clause['indent']] . "\n";
+		if (isset($clause_indents[$clause['indent']])) {
+			$tex .= '\clausenrb=' . $clause_indents[$clause['indent']] . "\n";
+		}
 	}
 	$tex .= '\clausei' . $clause['indent'] . '{';
 	if (in_array('diacritical', $clause['specials'])) {
