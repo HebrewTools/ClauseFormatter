@@ -1,4 +1,4 @@
-# HebrewClauses
+# ClauseFormatter
 A simple app to format a text from the Hebrew Bible in clauses.
 
 ## Demo
@@ -7,7 +7,7 @@ A simple app to format a text from the Hebrew Bible in clauses.
 
 ## Installation
 
-    $ git clone https://github.com/camilstaps/HebrewClauses
+    $ git clone https://github.com/HebrewTools/ClauseFormatter
 
 ## Configuration
 

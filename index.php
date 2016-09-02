@@ -48,7 +48,7 @@
 						<p>When you're done, use <code>PDF</code> to create a PDF document. With <code>TeX</code> you can get a ZIP file with generated (XeLa)TeX sources. The archive also includes the compiled PDF.</p>
 						<p>You can save your work using <code>Save / Restore</code>. Copy the text in the field to somewhere secure. When you want to continue your work, use the same button, input the saved text and hit <code>Restore</code>.</p>
 						<p>During editing, only verse numbers (1, 2, 3, ...) are shown. The PDF will have subnumbering (1a, 1b, ...).</p>
-						<p>This is open source software, licensed under GPL v3.0. Written by <a href="https://camilstaps.nl">Camil Staps</a>. See <a href="https://github.com/camilstaps/HebrewClauses">GitHub</a>.</p>
+						<p>This is open source software, licensed under GPL v3.0. Written by <a href="https://camilstaps.nl">Camil Staps</a>. See <a href="https://github.com/HebrewTools/ClauseFormatter">GitHub</a>.</p>
 					</div>
 				</div>
 				<hr/>
