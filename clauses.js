@@ -230,6 +230,9 @@ $('#make_pdf').submit(function(){
 $('#make_tex').submit(function(){
 	document.forms.make_tex.elements.verses.value = JSON.stringify(state.verses);
 });
+$('#make_zip').submit(function(){
+	document.forms.make_zip.elements.verses.value = JSON.stringify(state.verses);
+});
 
 $('body').keydown(function(event){
 	if (typeof event.target.form != 'undefined') {

@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 require('make.php');
 
 $verses = json_decode($_REQUEST['verses'], true);
