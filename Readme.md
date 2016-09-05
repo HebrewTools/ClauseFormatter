@@ -3,7 +3,7 @@ A simple app to format a text from the Hebrew Bible in clauses.
 
 ## Demo
 
-[hebrew.camilstaps.nl/clause-formatter][demo]
+[clauses.hebrewtools.org][demo]
 
 ## Installation
 
@@ -23,6 +23,6 @@ Font License.
 Thanks to [The Unbound Bible][unboundbible] for providing an easy-to-parse
 version of the Westminster Leningrad Codex.
 
-[demo]: https://hebrew.camilstaps.nl/clause-formatter
+[demo]: https://clauses.hebrewtools.org
 [ezrasil]: http://scripts.sil.org/cms/scripts/page.php?item_id=EzraSIL_Home
 [unboundbible]: http://unboundbible.org/
