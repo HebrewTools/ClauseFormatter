@@ -10,6 +10,10 @@
 	margin-right: 0.5em;
 }
 
+#output-options {
+	text-align: right;
+}
+
 form.form-inline {
 	display: inline;
 }
@@ -23,7 +27,6 @@ form.form-inline {
 }
 
 .input-chapter {
-	border-left: none;
 	width: 6em !important;
 }
 

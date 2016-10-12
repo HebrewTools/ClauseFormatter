@@ -208,10 +208,9 @@ function select_word(elem) {
 
 $('#get_text_form').submit(function(){
 	reference = {
-		'start_book':    $('#start_book').val(),
+		'book':          $('#book').val(),
 		'start_chapter': $('#start_chapter').val(),
 		'start_verse':   $('#start_verse').val(),
-		'end_book':      $('#end_book').val(),
 		'end_chapter':   $('#end_chapter').val(),
 		'end_verse':     $('#end_verse').val()
 	};

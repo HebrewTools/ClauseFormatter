@@ -24,26 +24,27 @@ function get_all_books() {
 	return $books;
 }
 
-function get_text($sbook, $schap, $sverse, $ebook, $echap, $everse) {
+function get_text($book, $schap, $sverse, $echap, $everse) {
 	$text = [];
 
 	$fh = fopen('wlc_utf8.txt', 'r');
 	do {
 		$line = explode("\t", fgets($fh));
-	} while (($line[0] != $sbook || $line[1] != $schap || $line[2] != $sverse)
+	} while (($line[0] != $book || $line[1] != $schap || $line[2] != $sverse)
 	         && !feof($fh));
 
-	if ($line[0] != $sbook) {
+	if ($line[0] != $book) {
 		fclose($fh);
 		return null;
 	}
 
 	$i = 0;
-	$text[] = ['verse' => $line[2], 'text' => $line[5]];
-	while (($line[0] != $ebook || $line[1] != $echap || $line[2] != $everse)
-					&& !feof($fh) && $i < 100) {
-		$line = explode("\t", fgets($fh));
+	while ($line[1] <= $echap &&
+			($line[1] < $echap || $line[2] <= $everse)
+			&& !feof($fh)
+			&& $i < 100) {
 		$text[] = ['verse' => $line[2], 'text' => $line[5]];
+		$line = explode("\t", fgets($fh));
 	}
 
 	fclose($fh);

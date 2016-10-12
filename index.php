@@ -45,7 +45,7 @@
 							<li><code>d</code> to (un)set a diacritical sign for the clause, to rewind numbering to the last clause with the same indentation.</li>
 							<li>Arrow keys to move around.</li>
 						</ul>
-						<p>When you're done, use <code>PDF</code> to create a PDF document. With <code>TeX</code> you can get a ZIP file with generated (XeLa)TeX sources. The archive also includes the compiled PDF.</p>
+						<p>When you're done, use <code>PDF</code> to create a PDF document. With <code>TeX</code> you get the (Xe)LaTeX source for that document. It depends among other things on <code>clauses.sty</code>. With <code>Zip</code>, you can get a ZIP file with this file, the generated (Xe)LaTeX source and the compiled PDF.</p>
 						<p>You can save your work using <code>Save / Restore</code>. Copy the text in the field to somewhere secure. When you want to continue your work, use the same button, input the saved text and hit <code>Restore</code>.</p>
 						<p>During editing, only verse numbers (1, 2, 3, ...) are shown. The PDF will have subnumbering (1a, 1b, ...).</p>
 						<p>This is open source software, licensed under GPL v3.0. Written by <a href="https://camilstaps.nl">Camil Staps</a>. See <a href="https://github.com/HebrewTools/ClauseFormatter">GitHub</a>.</p>
@@ -57,51 +57,40 @@
 			<div id="controls">
 				<div class="row">
 					<form class="form-inline" action="#" id="get_text_form">
-						<div class="col-md-4">
-							<label>From:</label>
+						<div class="col-sm-8 col-md-7">
+							<div class="form-group">
+								<select id="book" class="form-control input-book">
+									<?php
+										foreach ($all_books as $id => $book)
+											echo "<option value='$id'>$book</option>";
+									?>
+								</select>
+							</div>
+
 							<div class="form-group">
 								<div class="input-group">
-									<select id="start_book" class="form-control input-book">
-										<?php
-											foreach ($all_books as $id => $book) {
-												echo "<option value='$id'>$book</option>";
-											}
-										?>
-									</select>
-									<span class="input-group-btn" style="width:0px;"></span>
 									<input type="text" class="form-control input-chapter" id="start_chapter" placeholder="Chapter"/>
 									<span class="input-group-btn" style="width:0px;"></span>
 									<input type="text" class="form-control input-verse" id="start_verse" placeholder="Verse"/>
 								</div>
 							</div>
-						</div>
 
-						<div class="col-md-4">
-							<label>To:</label>
+							<label>to</label>
 							<div class="form-group">
 								<div class="input-group">
-									<select id="end_book" class="form-control input-book">
-										<?php
-											foreach ($all_books as $id => $book) {
-												echo "<option value='$id'>$book</option>";
-											}
-										?>
-									</select>
-									<span class="input-group-btn" style="width:0px;"></span>
 									<input type="text" class="form-control input-chapter" id="end_chapter" placeholder="Chapter"/>
 									<span class="input-group-btn" style="width:0px;"></span>
 									<input type="text" class="form-control input-verse" id="end_verse" placeholder="Verse"/>
 								</div>
 							</div>
-						</div>
 
-						<div class="col-md-1">
 							<div class="form-group">
-								<button class="btn btn-sm btn-primary" id="get_text">Get text</button>
+								<button class="btn btn-sm btn-primary" id="get_text">Fetch</button>
 							</div>
 						</div>
 					</form>
-					<div class="col-md-3">
+
+					<div class="col-sm-4 col-md-5" id="output-options">
 						<form action="makePdf.php" name="make_pdf" method="post" target="_blank" id="make_pdf" class="form-inline">
 							<input type="hidden" name="verses"/>
 							<div class="form-group">
