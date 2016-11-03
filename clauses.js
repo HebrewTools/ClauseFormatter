@@ -326,7 +326,11 @@ $('body').keydown(function(event){
 						   .clauses[state.selected.clause]
 						   .words[state.selected.word];
 				var note = 'note' in word ? word['note'] : '';
-				word['note'] = prompt("Enter note for " + word['text'] + ": ", note);
+				note = prompt("Enter note for " + word['text'] + ": ", note);
+				if (!note)
+					delete word['note'];
+				else
+					word['note'] = note;
 			}
 			break;
 		case 80: // P (predicate)
