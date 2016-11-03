@@ -23,7 +23,7 @@
 		<script src="clauses.js" defer="defer"></script>
 	</head>
 	<body role="application">
-		<div class="container" role="main">
+		<div class="container-fluid" role="main">
 
 			<div class="page-header">
 				<h1>Hebrew Clause Formatter</h1>

@@ -4,12 +4,13 @@
 }
 
 div#text {
-	font-size: 20px;
+	font-size: 24px;
 	margin-top: 20px;
 }
 
 	div.verse {
 		position: relative;
+		right: 1.5em;
 	}
 
 	span.ref {
