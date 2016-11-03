@@ -353,7 +353,7 @@ $('body').keydown(function(event){
 });
 
 $('#saveModal').on('shown.bs.modal', function(){
-	$('#saveTextarea').val(JSON.stringify(state.verses));
+	$('#saveTextarea').val(JSON.stringify(state.verses)).focus().select();
 });
 
 $('#restore').click(function(){
