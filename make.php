@@ -4,9 +4,11 @@ function get_word_text($word) {
 		return '';
 	$text = trim($word['text']);
 	if (in_array('subject', $word['specials']))
-		return '\subj{' . $text . '}';
+		$text = '\subj{' . $text . '}';
 	if (in_array('predicate', $word['specials']))
-		return '\pred{' . $text . '}';
+		$text = '\pred{' . $text . '}';
+	if (isset($word['note']))
+		$text .= '\note{' . $word['note'] . '}';
 	return $text;
 }
 
