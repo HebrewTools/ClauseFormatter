@@ -43,6 +43,7 @@
 							<li><code>Delete</code>, to delete a word. It will still be visible, so you can undelete it (with <code>Delete</code> as well), but won't appear in the PDF output.</li>
 							<li><code>p</code> and <code>s</code>, to (un)mark words as predicates or subjects, respectively. They will be coloured blue and red, also in the PDF output.</li>
 							<li><code>d</code> to (un)set a diacritical sign for the clause, to rewind numbering to the last clause with the same indentation.</li>
+							<li><code>n</code> to add a note to a word (e.g. the parsing of a verb).</li>
 							<li>Arrow keys to move around.</li>
 						</ul>
 						<p>When you're done, use <code>PDF</code> to create a PDF document. With <code>TeX</code> you get the (Xe)LaTeX source for that document. It depends among other things on <code>clauses.sty</code>. With <code>Zip</code>, you can get a ZIP file with this file, the generated (Xe)LaTeX source and the compiled PDF.</p>

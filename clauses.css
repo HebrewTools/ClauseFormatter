@@ -37,6 +37,17 @@ div#text {
 				background-color: #ccc;
 			}
 
+			span.word.has-note:after {
+				color: #888;
+				content: attr(data-note) '';
+				font-size: 70%;
+				margin-right: .5em;
+			}
+
+			span.word.selected.has-note:after {
+				color: #000;
+			}
+
 			span.word.deleted {
 				color: #aaa;
 			}

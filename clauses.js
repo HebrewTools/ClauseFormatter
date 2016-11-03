@@ -115,6 +115,10 @@ function make_editable_clause(clause) {
 				.data('wordid', i)
 				.attr('onclick', 'select_word(this)')
 				.text(clause.words[i].text);
+		if ('note' in clause.words[i]) {
+			word.addClass('has-note')
+				.attr('data-note', '(' + clause.words[i].note + ')');
+		}
 		if (clause.words[i].deleted) {
 			word.addClass('deleted');
 		}
@@ -314,6 +318,15 @@ $('body').keydown(function(event){
 		case 68: // D (diacritical sign)
 			if (state.selected) {
 				toggle_clause_special(state.selected, 'diacritical');
+			}
+			break;
+		case 78: // N (Note)
+			if (state.selected) {
+				var word = state.verses[state.selected.verse]
+						   .clauses[state.selected.clause]
+						   .words[state.selected.word];
+				var note = 'note' in word ? word['note'] : '';
+				word['note'] = prompt("Enter note for " + word['text'] + ": ", note);
 			}
 			break;
 		case 80: // P (predicate)
