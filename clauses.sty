@@ -82,6 +82,10 @@
 	\endgroup
 }
 
+\newcount\clausenrb@saved
+\def\saveclausenrb{\clausenrb@saved=\clausenrb}
+\def\restoreclausenrb{\clausenrb=\clausenrb@saved}
+
 \def\subj#1{\textcolor{red}{#1}}
 \def\pred#1{\textcolor{blue}{#1}}
 \def\diacritical{$\div$~}

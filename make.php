@@ -18,14 +18,16 @@ function make_tex_clause($clause) {
 	if (in_array('diacritical', $clause['specials'])) {
 		global $clause_indents;
 		if (isset($clause_indents[$clause['indent']])) {
-			$tex .= '\clausenrb=' . $clause_indents[$clause['indent']] . "\n";
+			$tex .= '\saveclausenrb' .
+				'\clausenrb=' . $clause_indents[$clause['indent']] . "\n";
 		}
 	}
 	$tex .= '\clausei' . $clause['indent'] . '{';
-	if (in_array('diacritical', $clause['specials'])) {
+	if (in_array('diacritical', $clause['specials']))
 		$tex .= '\diacritical{}';
-	}
 	$tex .= implode(' ', array_map('get_word_text', $clause['words'])) . '}';
+	if (in_array('diacritical', $clause['specials']))
+		$tex .= '\restoreclausenrb';
 	return $tex;
 }
 
@@ -37,9 +39,12 @@ function make_tex_clauses($verse) {
 		global $clause_indents;
 		$clause_indents = [];
 		$tex .= '\clauses{' . "\n";
+		$diacriticals = 0;
 		foreach ($verse['clauses'] as $i => $clause) {
 			$tex .= make_tex_clause($clause) . "\n";
-			$clause_indents[$clause['indent']] = $i;
+			if (in_array('diacritical', $clause['specials']))
+				$diacriticals++;
+			$clause_indents[$clause['indent']] = $i - $diacriticals;
 		}
 		$tex .= "}\n";
 	}
