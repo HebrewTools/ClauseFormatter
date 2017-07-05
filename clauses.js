@@ -94,13 +94,27 @@ function getText(reference, callback) {
 	});
 }
 
+// Make a Hebrew word searchable: remove accents and vowels
+function makeSearchable(word) {
+	return word
+		.replace(/\ufb2c/g, '\ufb2a') // shin
+		.replace(/\ufb2d/g, '\ufb2b') // sin
+		.replace(/[^\u05be\u05c1\u05c2\u05d0-\u05ea\ufb2a\ufb2b]+/g, '') // only keep letters
+		.replace(/^\u05d5/, ''); // initial waw
+}
+
 // From a clauses.php verse object (with keys verse and text), make a
 // clauses.js verse object (with keys ref and an array clauses)
 // Initially this is just one clause
 // A clause has keys indent and words
 function make_verse(verse) {
 	var make_word = function(word) {
-		return {'text': word, 'deleted': false, 'specials': []};
+		return {
+			'text': word,
+			'unvocalised': makeSearchable(word),
+			'deleted': false,
+			'specials': []
+		};
 	}
 
 	return {
@@ -111,6 +125,16 @@ function make_verse(verse) {
 			'specials': []
 		}]
 	};
+}
+
+// Check if a word should be highlighted
+function highlight(word) {
+	return state.selected != null &&
+		word == state
+			.verses[state.selected.verse]
+			.clauses[state.selected.clause]
+			.words[state.selected.word]
+			.unvocalised;
 }
 
 // From a clause object, make a DOM element to represent it
@@ -127,6 +151,9 @@ function make_editable_clause(clause) {
 				.data('wordid', i)
 				.attr('onclick', 'select_word(this)')
 				.text(clause.words[i].text);
+		if (highlight(clause.words[i].unvocalised)) {
+			word.addClass('highlighted');
+		}
 		if ('note' in clause.words[i]) {
 			word.addClass('has-note')
 				.attr('data-note', '(' + clause.words[i].note + ')');
@@ -199,7 +226,6 @@ function update_document() {
 
 	if (state.selected) {
 		var loc = state.selected;
-		var wordcount = 0;
 		$($($(elem.find('.verse')[loc.verse])
 			.find('.clause')[loc.clause])
 			.find('.word')[loc.word])

@@ -47,6 +47,10 @@ div#text {
 				background-color: #ccc;
 			}
 
+			span.word.highlighted {
+				background-color: #bef;
+			}
+
 			span.word.has-note:after {
 				color: #888;
 				content: attr(data-note) '';
