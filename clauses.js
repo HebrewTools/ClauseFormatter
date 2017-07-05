@@ -6,7 +6,7 @@ var state = {
 
 function hide_verse(verse) {
 	state.hidden.push(verse);
-	state.hidden = state.hidden.sort();
+	state.hidden = state.hidden.sort(function(a,b) {return a-b;});
 }
 
 function unhide_range(from, to) {
