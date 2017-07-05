@@ -275,9 +275,6 @@ $('#get_text_form').submit(function(){
 $('#make_pdf').submit(function(){
 	document.forms.make_pdf.elements.verses.value = JSON.stringify(state.verses);
 });
-$('#make_tex').submit(function(){
-	document.forms.make_tex.elements.verses.value = JSON.stringify(state.verses);
-});
 $('#make_zip').submit(function(){
 	document.forms.make_zip.elements.verses.value = JSON.stringify(state.verses);
 });
@@ -399,6 +396,18 @@ $('body').keydown(function(event){
 	update_document();
 
 	return false;
+});
+
+$('#TeXModal').on('shown.bs.modal', function(){
+	$.ajax('makeTeX.php', {
+			'type': 'POST',
+			'data': {
+				'verses': JSON.stringify(state.verses)
+			},
+			'success': function(data, textStatus, jqXHR) {
+				$('#TeXTextarea').val(data).focus().select();
+			}
+	});
 });
 
 $('#saveModal').on('shown.bs.modal', function(){

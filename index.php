@@ -98,10 +98,9 @@
 								<button class="btn btn-sm btn-success">PDF</button>
 							</div>
 						</form>
-						<form action="makeTeX.php" name="make_tex" method="post" target="_blank" id="make_tex" class="form-inline">
-							<input type="hidden" name="verses"/>
+						<form action="#" class="form-inline">
 							<div class="form-group">
-								<button class="btn btn-sm btn-warning">TeX</button>
+								<button class="btn btn-sm btn-warning" data-toggle="modal" href="#TeXModal">TeX</button>
 							</div>
 						</form>
 						<form action="makeZip.php" name="make_zip" method="post" target="_blank" id="make_zip" class="form-inline">
@@ -120,6 +119,24 @@
 			</div>
 
 			<div id="text" dir="rtl"></div>
+
+			<div class="modal fade" id="TeXModal" role="dialog" tabindex="-1">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">×</button>
+							<h3>TeX</h3>
+						</div>
+						<div class="modal-body">
+							<p>Copy this text to your TeX document. You will need <a href="clauses.sty" target="_blank">clauses.sty</a> as well.</p>
+							<textarea id="TeXTextarea" class="form-control" rows="10"></textarea>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<div class="modal fade" id="saveModal" role="dialog" tabindex="-1">
 				<div class="modal-dialog">
