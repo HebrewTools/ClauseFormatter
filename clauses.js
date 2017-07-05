@@ -1,7 +1,19 @@
 var state = {
 	'verses': [],
+	'hidden': [],
 	'selected': null
 };
+
+function hide_verse(verse) {
+	state.hidden.push(verse);
+	state.hidden = state.hidden.sort();
+}
+
+function unhide_range(from, to) {
+	state.hidden = state.hidden.filter(function(x) {
+		return x < from || x > to;
+	});
+}
 
 // Toggle a special annotation for a word on a location
 function toggle_word_special(loc, special) {
@@ -131,10 +143,19 @@ function make_editable_clause(clause) {
 }
 
 // From a verse object, make a DOM element to represent it
-function make_verse_elem(verse) {
+function make_verse_elem(i) {
+	var tohide = i;
+	var verse = state.verses[i];
 	var div = $('<div></div>');
 	div.addClass('verse');
-	div.append($('<span class="ref"></span>').text(verse.ref));
+	div.append(
+			$('<span class="ref"></span>')
+				.text(verse.ref)
+				.attr('title', 'Hide')
+				.click(function(){
+					hide_verse(tohide);
+					update_document();
+				}));
 	for (var i in verse.clauses) {
 		clause = verse.clauses[i];
 		div.append(make_editable_clause(clause).data('clauseid', i));
@@ -142,14 +163,38 @@ function make_verse_elem(verse) {
 	return div;
 }
 
+// Make an expandable verse list for hidden verses
+function make_expandable_elem(start, end) {
+	var div = $('<div></div>');
+	div.addClass('expandable-verse')
+		.text(start == end
+				? state.verses[start].ref
+				: (state.verses[start].ref + ' - ' + state.verses[end].ref))
+		.attr('title', 'Show')
+		.click(function(){
+			unhide_range(start, end);
+			update_document();
+		});
+	return div;
+}
+
 // Update all DOM elements under our control
 function update_document() {
 	var elem = $('#text');
 	elem.html('');
-	for (var i in state.verses) {
-		var div = make_verse_elem(state.verses[i]);
-		div.data('verseid', i);
-		elem.append(div);
+	var h = 0;
+	for (var i = 0; i < state.verses.length; i++) {
+		if (h >= state.hidden.length || i != state.hidden[h]) {
+			var div = make_verse_elem(i);
+			div.data('verseid', i);
+			elem.append(div);
+		} else {
+			var start = i;
+			do { i++; h++; } while (h < state.hidden.length && state.hidden[h] == i);
+			i--;
+			var end = i;
+			elem.append(make_expandable_elem(start, end));
+		}
 	}
 
 	if (state.selected) {

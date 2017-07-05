@@ -13,7 +13,16 @@ div#text {
 		right: 1.5em;
 	}
 
+	div.expandable-verse {
+		color: #888;
+		cursor: pointer;
+		font-family: serif;
+		direction: ltr;
+		text-align: right;
+	}
+
 	span.ref {
+		cursor: pointer;
 		font-family: serif;
 		position: absolute;
 		right: -1.5em;
