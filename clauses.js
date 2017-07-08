@@ -100,7 +100,7 @@ function makeSearchable(word) {
 		.replace(/\ufb2c/g, '\ufb2a') // shin
 		.replace(/\ufb2d/g, '\ufb2b') // sin
 		.replace(/[^\u05be\u05c1\u05c2\u05d0-\u05ea\ufb2a\ufb2b]+/g, '') // only keep letters
-		.replace(/^\u05d5/, ''); // initial waw
+		.replace(/^\u05d5?\u05d4?/, ''); // initial waw and/or he
 }
 
 // From a clauses.php verse object (with keys verse and text), make a
