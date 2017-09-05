@@ -44,9 +44,11 @@
 							<li><code>p</code> and <code>s</code>, to (un)mark words as predicates or subjects, respectively. They will be coloured blue and red, also in the PDF output.</li>
 							<li><code>d</code> to (un)set a diacritical sign for the clause, to rewind numbering to the last clause with the same indentation.</li>
 							<li><code>n</code> to add a note to a word (e.g. the parsing of a verb).</li>
+							<li><code>t</code> to add a translation to a word.</li>
 							<li>Arrow keys to move around.</li>
 						</ul>
 						<p>When you're done, use <code>PDF</code> to create a PDF document. With <code>TeX</code> you get the (Xe)LaTeX source for that document. It depends among other things on <code>clauses.sty</code>. With <code>Zip</code>, you can get a ZIP file with this file, the generated (Xe)LaTeX source and the compiled PDF.</p>
+						<p>Note that currently the PDF and TeX does not include notes or translations.</p>
 						<p>You can save your work using <code>Save / Restore</code>. Copy the text in the field to somewhere secure. When you want to continue your work, use the same button, input the saved text and hit <code>Restore</code>.</p>
 						<p>During editing, only verse numbers (1, 2, 3, ...) are shown. The PDF will have subnumbering (1a, 1b, ...).</p>
 						<p>This is open source software, licensed under GPL v3.0. Written by <a href="https://camilstaps.nl">Camil Staps</a>. See <a href="https://github.com/HebrewTools/ClauseFormatter">GitHub</a>.</p>

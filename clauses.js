@@ -146,7 +146,7 @@ function make_editable_clause(clause) {
 	}
 	div.css('margin-right', (clause.indent * 1.5) + 'em');
 	for (var i in clause.words) {
-		var word = $('<span></span>')
+		var word = $('<div></div>')
 				.addClass('word')
 				.data('wordid', i)
 				.attr('onclick', 'select_word(this)')
@@ -155,8 +155,16 @@ function make_editable_clause(clause) {
 			word.addClass('highlighted');
 		}
 		if ('note' in clause.words[i]) {
-			word.addClass('has-note')
-				.attr('data-note', '(' + clause.words[i].note + ')');
+			var note = $('<span></span>')
+					.addClass('note')
+					.text(clause.words[i].note);
+			word.append(note);
+		}
+		if ('translation' in clause.words[i]) {
+			var translation = $('<span></span>')
+					.addClass('translation')
+					.text(clause.words[i].translation);
+			word.append(translation);
 		}
 		if (clause.words[i].deleted) {
 			word.addClass('deleted');
@@ -409,6 +417,19 @@ $('body').keydown(function(event){
 		case 83: // S (subject)
 			if (state.selected) {
 				toggle_word_special(state.selected, 'subject');
+			}
+			break;
+		case 84: // T (translation)
+			if (state.selected) {
+				var word = state.verses[state.selected.verse]
+						   .clauses[state.selected.clause]
+						   .words[state.selected.word];
+				var trans = 'translation' in word ? word['translation'] : '';
+				trans = prompt("Enter translation for " + word['text'] + ": ", trans);
+				if (!trans)
+					delete word['translation'];
+				else
+					word['translation'] = trans;
 			}
 			break;
 		default:

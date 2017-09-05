@@ -36,52 +36,59 @@ div#text {
 			content: '÷';
 		}
 
-		span.word {
+		div.word {
 			border-radius: 3px;
+			border: 2px solid transparent;
 			cursor: pointer;
+			display: inline-block;
 			margin-left: 0.5em;
 			padding: 2px;
+			vertical-align: top;
 		}
 
-			span.word:hover {
-				background-color: #ccc;
+			div.word:hover {
+				border-color: #ccc;
 			}
 
-			span.word.highlighted {
+			div.word.selected {
+				border-color: #33c2f2;
+			}
+
+			div.word.highlighted {
 				background-color: #bef;
 			}
 
-			span.word.has-note:after {
-				color: #888;
-				content: attr(data-note) '';
-				font-size: 70%;
-				margin-right: .5em;
-			}
-
-			span.word.selected.has-note:after {
-				color: #000;
-			}
-
-			span.word.deleted {
+			div.word.deleted {
 				color: #aaa;
 			}
 
-			span.word.selected {
-				background-color: #33c2f2;
+			div.word .note {
+				color: #888 !important;
+				display: block;
+				font-size: 65%;
 			}
 
-			span.word.special-predicate {
-				color: #00f;
+			div.word.selected .note {
+				color: #000;
 			}
 
-				span.word.special-predicate.deleted {
+			div.word .translation {
+				display: block;
+				font-size: 80%;
+			}
+
+			div.word.special-predicate {
+				color: #00f !important;
+			}
+
+				div.word.special-predicate.deleted {
 					color: #66f;
 				}
 
-			span.word.special-subject {
-				color: #b00;
+			div.word.special-subject {
+				color: #b00 !important;
 			}
 
-				span.word.special-subject.deleted {
+				div.word.special-subject.deleted {
 					color: #f66;
 				}
