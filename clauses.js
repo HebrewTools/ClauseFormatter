@@ -314,7 +314,8 @@ $('#make_zip').submit(function(){
 });
 
 $('body').keydown(function(event){
-	if (typeof event.target.form != 'undefined') {
+	if (typeof event.target.form != 'undefined' ||
+			event.altKey || event.ctrlKey || event.shiftKey) {
 		return true;
 	}
 
