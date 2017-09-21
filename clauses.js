@@ -154,17 +154,17 @@ function make_editable_clause(clause) {
 		if (highlight(clause.words[i].unvocalised)) {
 			word.addClass('highlighted');
 		}
-		if ('note' in clause.words[i]) {
-			var note = $('<span></span>')
-					.addClass('note')
-					.text(clause.words[i].note);
-			word.append(note);
-		}
 		if ('translation' in clause.words[i]) {
 			var translation = $('<span></span>')
 					.addClass('translation')
 					.text(clause.words[i].translation);
 			word.append(translation);
+		}
+		if ('note' in clause.words[i]) {
+			var note = $('<span></span>')
+					.addClass('note')
+					.text(clause.words[i].note);
+			word.append(note);
 		}
 		if (clause.words[i].deleted) {
 			word.addClass('deleted');
